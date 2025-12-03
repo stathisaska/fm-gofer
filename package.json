@@ -15,8 +15,7 @@
       "import": "./dist/fm-gofer.js",
       "require": "./dist/fm-gofer.umd.cjs",
       "default": "./dist/fm-gofer.js"
-    },
-    "./polyfill-ie11": "./dist/polyfill-ie11.js"
+    }
   },
   "files": [
     "dist"

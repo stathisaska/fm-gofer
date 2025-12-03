@@ -5,9 +5,10 @@ interface JsonObject {
 }
 interface JsonArray extends Array<JsonValue> {
 }
-export declare class FMGPromise extends Promise<string> {
+export interface FMGPromise extends Promise<string> {
     json<T = JsonObject | JsonArray>(): Promise<T>;
 }
+export declare const FMGPromise: new (executor: (resolve: (value: string) => void, reject: (reason?: any) => void) => void) => FMGPromise;
 /**
  * Perform a FileMaker Script with option. FM can return a result by resolving or rejecting
  * @function

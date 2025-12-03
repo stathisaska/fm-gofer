@@ -144,11 +144,22 @@ interface JsonObject {
 }
 interface JsonArray extends Array<JsonValue> {}
 
-export class FMGPromise extends Promise<string> {
+// Runtime implementation - keeps the class for instanceof checks
+class FMGPromiseImpl extends Promise<string> {
   json<T = JsonObject | JsonArray>() {
     return this.then((text: string) => JSON.parse(text) as T);
   }
 }
+
+// Export as interface for better TypeScript compatibility when consumed as a dependency
+export interface FMGPromise extends Promise<string> {
+  json<T = JsonObject | JsonArray>(): Promise<T>;
+}
+
+// Export the constructor
+export const FMGPromise = FMGPromiseImpl as any as {
+  new (executor: (resolve: (value: string) => void, reject: (reason?: any) => void) => void): FMGPromise;
+};
 
 /**
  * Perform a FileMaker Script with option. FM can return a result by resolving or rejecting
